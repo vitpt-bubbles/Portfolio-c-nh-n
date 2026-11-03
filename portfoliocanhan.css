@@ -149,7 +149,12 @@ a {
 .banner {
   position:relative;
   overflow:hidden;
-  padding:100px 5%;
+  min-height: 75vh;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding:130px 5%;
   text-align:center;
   color:#eadfc8;
   background:radial-gradient(ellipse at 50% -10%,rgba(255,200,100,.38),transparent 60%),#14110e;
@@ -172,10 +177,10 @@ a {
   z-index:1;
   display:inline-block;
   margin-bottom:22px;
-  padding:4px 14px;
+  padding:7px 18px;
   font-family:var(--type);
   font-weight:700;
-  font-size:.8rem;
+  font-size:.95rem;
   letter-spacing:4px;
   color:#e0564a;
   border:3px solid #e0564a;
@@ -186,7 +191,7 @@ a {
 .banner h1 {
   margin:0 0 10px;
   font-family:var(--head);
-  font-size:3.4rem;
+  font-size:clamp(2.2rem, 6vw, 4rem);
   font-style:italic;
   font-weight:600;
   color:#f3e6c4;
@@ -197,10 +202,11 @@ a {
   max-width:900px;
   margin:0 auto 14px;
   animation:up .8s .2s both;
+  font-size: 1.3rem;
 }
 .typing-line {
   font-family:var(--type);
-  font-size:1.6rem;
+  font-size:clamp(1.2rem, 3.2vw, 2rem);
   font-weight:700;
   color:#d9a441;
 }
@@ -210,7 +216,7 @@ a {
 .btn {
   display:inline-block;
   margin-top:10px;
-  padding:11px 28px;
+  padding:14px 36px;
   font-family:var(--type);
   font-weight:700;
   text-transform:uppercase;
@@ -220,6 +226,7 @@ a {
   border:2px solid #d9a441;
   border-radius:2px;
   transition:background .2s,color .2s,transform .2s;
+  font-size:1.06rem;
 }
 .btn:hover {
   background:#d9a441;
@@ -972,7 +979,6 @@ footer::after {
     display:block;
     padding:10px 0;
   }
-  .banner h1{font-size:1.8rem;}
   .about{
     justify-content:center;
     text-align:center;

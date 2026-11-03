@@ -18,6 +18,20 @@ function type() {
   else if (xoa && c === 0) { xoa = false; p = (p + 1) % phrases.length; wait = 300; }
   setTimeout(type, wait);
 }
+const typingLine = typing.parentElement; 
+function giuChieuCao() {
+  typingLine.style.minHeight = "";
+  let cao = 0;
+  phrases.forEach(function (cau) {
+    typing.textContent = cau;
+    cao = Math.max(cao, typingLine.offsetHeight);
+  });
+  typingLine.style.minHeight = cao + "px";
+  typing.textContent = phrases[p].slice(0, c);
+}
+giuChieuCao();
+document.fonts.ready.then(giuChieuCao); 
+window.addEventListener("resize", giuChieuCao); 
 type();
 const filters = document.querySelectorAll(".filter");
 filters.forEach(function (btn) {
