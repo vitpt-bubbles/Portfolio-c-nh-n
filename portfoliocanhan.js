@@ -42,11 +42,41 @@ filters.forEach(function (btn) {
     if (idx >= 0) nhayDen(idx + 1);
   });
 });
-document.querySelectorAll(".skill").forEach(function (s) {
-  const level = s.dataset.level;
-  s.querySelector(".pct").textContent = level + "%";
-  s.querySelector(".bar-fill").style.setProperty("--level", level + "%");
+const bieuTuong = { "HTML": "🌐", "CSS": "🎨", "JavaScript": "⚡", "Java": "☕", "Git / GitHub": "🔀", "Python": "🐍" };
+const dsSkill = Array.from(document.querySelectorAll(".skill"));
+const maxLevel = Math.max.apply(null, dsSkill.map(function (s) { return +s.dataset.level; }));
+let daGhim = false;
+dsSkill.forEach(function (s) {
+  const level = +s.dataset.level;
+  const ten = s.querySelector(".skill-top span").textContent.trim();
+  const full = Math.round(level / 5);                       
+  const bac = "Đang luyện";
+  s.dataset.rank = "thap";
+  if (level === maxLevel && !daGhim) { s.classList.add("top"); daGhim = true; }
+  s.querySelector(".skill-top").innerHTML =
+    '<span class="sk-icon">' + (bieuTuong[ten] || "🔍") + '</span>' +
+    '<span class="sk-name">' + ten + '</span>' +
+    '<span class="sk-rank">' + bac + '</span>';
+  let seg = "";
+  for (let i = 0; i < 20; i++) {
+    seg += '<i style="--d:' + (i * 45) + 'ms"' + (i < full ? ' class="on"' : "") + "></i>";
+  }
+  s.querySelector(".bar").innerHTML = seg;
+  s.insertAdjacentHTML("beforeend", '<p class="sk-pct"><b data-to="' + level + '">0</b>%</p>');
 });
+const skillSec = document.getElementById("ky-nang");
+new IntersectionObserver(function (es, ob) {
+  if (!es[0].isIntersecting) return;
+  ob.disconnect();
+  skillSec.querySelectorAll(".sk-pct b").forEach(function (b) {
+    const to = +b.dataset.to, t0 = performance.now();
+    (function tick(t) {
+      const p = Math.min((t - t0) / 1200, 1);
+      b.textContent = Math.round(to * p);
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  });
+}, { threshold: 0.3 }).observe(skillSec);
 const links = document.querySelectorAll(".thanhdieuhuong ul a");
 const observer = new IntersectionObserver(function (entries) {
   entries.forEach(function (entry) {
@@ -218,3 +248,47 @@ window.addEventListener("scroll", function () {
   const het = document.documentElement.scrollHeight - window.innerHeight;
   xp.style.width = (window.scrollY / het) * 100 + "%";
 });
+const anhChungChi = [
+  { side: "left",  top: 140, x: 0,  rot: -3, pin: false, src: "images/h9.jpg", cap: "Sở thích" },
+  { side: "left",  top: 360, x: 30, rot: 3,  pin: true,  src: "images/h7.jpg", cap: "Manh mối" },
+  { side: "right", top: 240, x: 30, rot: 3,  pin: true,  src: "images/h8.jpg", cap: "Dấu vết" },
+  { side: "right", top: 480, x: 30, rot: -3, pin: false, src: "images/h10.jpg", cap: "Vật chứng 03" }
+];
+function themAnhChungChi() {
+  const sec = document.getElementById("chung-chi");
+  anhChungChi.forEach(function (d, i) {
+    const f = document.createElement("figure");
+    f.className = "side-photo " + d.side + (d.pin ? " pin" : "");
+    f.style.top = d.top + "px";
+    f.style.setProperty("--rot", d.rot + "deg");
+    f.style.setProperty("--x", d.x + "px");
+    f.style.transitionDelay = (0.2 + i * 0.15) + "s";
+    f.innerHTML = '<img src="' + d.src + '" alt="" loading="lazy"><figcaption>' + d.cap + "</figcaption>";
+    f.querySelector("img").addEventListener("error", function () { f.remove(); });
+    sec.appendChild(f);
+  });
+}
+themAnhChungChi();
+const anhDuAn = [
+  { side: "left",  top: 110, x: 0,   rot: 4,  pin: false, src: "images/h1.jpg",  cap: "Vật chứng 02" },
+  { side: "right", top: 160, x: 0,   rot: -3, pin: true,  src: "images/h2.jpg",  cap: "Hồ sơ mật" },
+  { side: "left",  top: 370, x: 40,  rot: -3, pin: true,  src: "images/h3.jpg",  cap: "Manh mối" },
+  { side: "right", top: 400, x: 40,  rot: 3,  pin: false, src: "images/h4.jpg",  cap: "Dấu vết" },
+  { side: "left",  top: 640, x: -10, rot: 3,  pin: false, src: "images/h5.jpg", cap: "Nhân chứng" },
+  { side: "right", top: 660, x: 0,   rot: -4, pin: true,  src: "images/h6.jpg", cap: "Lưu trữ" }
+];
+function themAnhDuAn() {
+  const sec = document.getElementById("du-an");
+  anhDuAn.forEach(function (d, i) {
+    const f = document.createElement("figure");
+    f.className = "side-photo " + d.side + (d.pin ? " pin" : "");
+    f.style.top = d.top + "px";
+    f.style.setProperty("--rot", d.rot + "deg");
+    f.style.setProperty("--x", d.x + "px");
+    f.style.transitionDelay = (0.2 + i * 0.12) + "s";
+    f.innerHTML = '<img src="' + d.src + '" alt="" loading="lazy"><figcaption>' + d.cap + "</figcaption>";
+    f.querySelector("img").addEventListener("error", function () { f.remove(); });
+    sec.appendChild(f);
+  });
+}
+themAnhDuAn();
