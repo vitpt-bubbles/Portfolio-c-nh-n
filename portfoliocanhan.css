@@ -1585,7 +1585,10 @@ footer::after {
   opacity: .9;
 }
 @media (max-width: 768px) {
-  .tl-card.photo-right, .tl-card.photo-left { padding: 18px 22px; min-height: 0; }
+  .tl-card.photo-right, .tl-card.photo-left { 
+    padding: 18px 22px; 
+    min-height: 0; 
+  }
   .tl-photo, .tl-photo.right, .tl-photo.left {
     position: relative;
     inset: auto;
@@ -1612,4 +1615,205 @@ footer::after {
   .side-photo img {
     height: 140px;
   }
+}
+/*Trang trí phần Giới thiệu */
+.about { 
+  position: relative; 
+}
+/*Khung ảnh kiểu túi vật chứng*/
+.avatar-wrap {
+  position: relative;
+  width: 230px;
+  margin: 0;
+  padding: 50px 14px 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.38), rgba(255,255,255,.08));
+  border: 2px solid rgba(20,17,14,.6);
+  border-radius: 4px;
+  box-shadow: 5px 6px 0 rgba(20,17,14,.35), inset 0 0 24px rgba(255,255,255,.3);
+  transform: rotate(2deg);
+  transition: transform .3s;
+}
+.avatar-wrap:hover { 
+  transform: rotate(0) scale(1.03); 
+}
+/* dải đỏ dán miệng túi */
+.avatar-wrap::before {
+  content: "VẬT CHỨNG · EVIDENCE";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 9px 0;
+  text-align: center;
+  font-family: var(--type);
+  font-weight: 700;
+  font-size: .72rem;
+  letter-spacing: 3px;
+  color: #f5edd9;
+  background: #b3202a;
+  border-bottom: 3px dashed rgba(245,237,217,.7);
+}
+/* vệt phản chiếu bóng của nhựa */
+.avatar-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg,
+    rgba(255,255,255,.35) 0 16%,
+    transparent 16% 24%,
+    rgba(255,255,255,.18) 24% 29%,
+    transparent 29%);
+}
+.avatar-wrap .avatar {
+  width: 100%;
+  height: 250px;
+  border: 3px solid #f7f0dd;
+  border-radius: 0;
+  box-shadow: 2px 3px 6px var(--shadow);
+  transform: none;
+}
+.avatar-wrap .avatar:hover { 
+  transform: none; 
+}
+/* nhãn dán mã hồ sơ */
+.avatar-wrap figcaption {
+  margin: 14px -4px 16px;
+  padding: 6px 8px;
+  text-align: center;
+  font-family: var(--type);
+  font-weight: 700;
+  font-size: .68rem;
+  letter-spacing: 2px;
+  color: var(--text);
+  background: #f5edd9;
+  border: 1px solid rgba(0,0,0,.25);
+  box-shadow: 2px 3px 0 rgba(0,0,0,.2);
+  transform: rotate(-2deg);
+}
+/* thẻ thông tin: kẹp giấy + dấu mộc */
+.about > .item:nth-of-type(1) { position: relative; }
+.about > .item:nth-of-type(1)::before {
+  content: "📎";
+  position: absolute;
+  top: -16px;
+  right: 24px;
+  font-size: 2rem;
+  transform: rotate(15deg);
+}
+.about > .item:nth-of-type(1)::after {
+  content: "ĐÃ XÁC MINH";
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 2px 12px;
+  font-family: var(--type);
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: 3px;
+  color: #b3202a;
+  border: 3px solid #b3202a;
+  border-radius: 4px;
+  transform: rotate(-8deg);
+  opacity: .8;
+  pointer-events: none;
+}
+/* đoạn giới thiệu: giấy nhớ vàng */
+.about > .item:nth-of-type(2) { 
+  position: relative; 
+}
+.about > .item:nth-of-type(2)::before {
+  content: "🔍 Ghi chú: thích ngôn ngữ, mê trinh thám";
+  position: absolute;
+  top: -26px;
+  right: 24px;
+  max-width: 220px;
+  padding: 10px 14px;
+  font-family: var(--type);
+  font-size: .75rem;
+  line-height: 1.4;
+  color: #4a3a10;
+  background: #f4d96b;
+  box-shadow: 2px 4px 8px var(--shadow);
+  transform: rotate(3deg);
+}
+/* vết cà phê */
+.about::after {
+  content: "";
+  position: absolute;
+  left: 38%;
+  bottom: -50px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 6px solid rgba(90,50,15,.18);
+  box-shadow: inset 0 0 8px rgba(90,50,15,.12);
+  pointer-events: none;
+}
+@media (max-width: 768px) {
+  .about > .item:nth-of-type(2)::before,
+  .about::after { display: none; }
+}
+/* thẻ mục tiêu: kẹp giấy + dấu mộc */
+#muc-tieu-nghe-nghiep > .item { 
+  position: relative; 
+}
+#muc-tieu-nghe-nghiep > .item::before {
+  content: "📎";
+  position: absolute;
+  top: -18px;
+  left: 24px;
+  font-size: 2rem;
+  transform: rotate(-15deg);
+}
+#muc-tieu-nghe-nghiep > .item::after {
+  content: "ĐANG ĐIỀU TRA";
+  position: absolute;
+  top: -16px;
+  right: 24px;
+  padding: 2px 12px;
+  font-family: var(--type);
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: 3px;
+  color: #b3202a;
+  background: var(--card);
+  border: 3px solid #b3202a;
+  border-radius: 4px;
+  transform: rotate(4deg);
+  opacity: .9;
+  pointer-events: none;
+}
+/* dây đỏ nối các ảnh */
+.nganh { 
+  position: relative; 
+}
+.nganh::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 16%;
+  right: 16%;
+  height: 3px;
+  background: #b3202a;
+  box-shadow: 0 2px 3px rgba(0,0,0,.35);
+  z-index: 0;
+}
+.nganh-item { 
+  z-index: 1; 
+}
+/* đổi băng keo thành ghim đỏ */
+.nganh-item::before {
+  top: -10px;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle at 35% 30%, #ff8a7a, #b3202a 60%);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 1px 3px 4px rgba(0,0,0,.4);
+  transform: translateX(-50%);
+}
+@media (max-width: 768px) {
+  .nganh { grid-template-columns: 1fr; }
+  .nganh::before { display: none; }
 }
